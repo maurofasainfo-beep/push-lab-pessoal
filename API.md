@@ -172,7 +172,7 @@ Resposta:
 
 Validações:
 
-- `title`: 1-120 caracteres.
+- `title`: opcional, até 120 caracteres. Se vier vazio, a notificação usa o nome do PWA como fallback visual.
 - `body`: 1-600 caracteres.
 - imagens/ícones/badge: HTTPS.
 - `target_url`: relativo seguro, HTTP ou HTTPS.
@@ -285,4 +285,3 @@ Resposta:
   "error": null
 }
 ```
-

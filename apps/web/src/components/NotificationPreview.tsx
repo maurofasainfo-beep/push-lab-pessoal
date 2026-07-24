@@ -18,7 +18,7 @@ export function NotificationPreview({ appName, title, body, imageUrl }: Notifica
         </div>
       </div>
       <div className="preview-content">
-        <strong>{title || "Titulo da notificacao"}</strong>
+        <strong>{title || "Avisos Pessoais"}</strong>
         <p>{body || "Mensagem que sera enviada para o dispositivo autorizado."}</p>
       </div>
       {imageUrl ? (
@@ -29,4 +29,3 @@ export function NotificationPreview({ appName, title, body, imageUrl }: Notifica
     </section>
   );
 }
-

@@ -36,7 +36,7 @@ export function explainPwaError(error: unknown): string {
     return "Notifications API indisponivel neste navegador/contexto.";
   }
   if (message.includes("NOTIFICATION_PERMISSION_DENIED")) {
-    return "Permissao de notificacao negada. No iPhone, altere em Ajustes > Notificacoes > Push Lab Pessoal.";
+    return "Permissao de notificacao negada. No iPhone, altere em Ajustes > Notificacoes > Avisos Pessoais.";
   }
   if (message.includes("VAPID_PUBLIC_KEY_MISSING")) {
     return "VITE_VAPID_PUBLIC_KEY nao esta configurada no frontend.";

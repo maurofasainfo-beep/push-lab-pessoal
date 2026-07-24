@@ -229,7 +229,7 @@ const registerSubscriptionSchema = z.object({
 });
 
 const notificationInputSchema = z.object({
-  title: z.string().trim().min(1).max(120),
+  title: z.string().trim().max(120).optional().default(""),
   body: z.string().trim().min(1).max(600),
   image_url: httpsUrl,
   icon_url: httpsUrl,
@@ -252,7 +252,7 @@ const listNotificationsSchema = z.object({
   limit: z.number().int().min(1).max(100).optional().default(50)
 });
 const sendTestSchema = z.object({
-  title: z.string().trim().min(1).max(120).optional().default("Teste do Push Lab Pessoal"),
+  title: z.string().trim().max(120).optional().default(""),
   body: z.string().trim().min(1).max(600).optional().default("Se voce recebeu esta mensagem, o Web Push esta funcionando."),
   target_url: httpUrl.default("/")
 });

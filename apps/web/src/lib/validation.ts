@@ -50,7 +50,7 @@ export const customDataSchema = z
 
 export const notificationFormSchema = z
   .object({
-    title: z.string().trim().min(1, "Titulo obrigatorio.").max(TITLE_MAX_LENGTH, `Titulo deve ter no maximo ${TITLE_MAX_LENGTH} caracteres.`),
+    title: z.string().trim().max(TITLE_MAX_LENGTH, `Titulo deve ter no maximo ${TITLE_MAX_LENGTH} caracteres.`).optional().or(z.literal("")),
     body: z.string().trim().min(1, "Mensagem obrigatoria.").max(BODY_MAX_LENGTH, `Mensagem deve ter no maximo ${BODY_MAX_LENGTH} caracteres.`),
     imageUrl: optionalSafeUrl("Imagem", true),
     iconUrl: optionalSafeUrl("Icone", true),
@@ -84,4 +84,3 @@ export function parseCustomData(value?: string): Record<string, unknown> {
   if (parsed && typeof parsed === "object" && !Array.isArray(parsed)) return parsed as Record<string, unknown>;
   return {};
 }
-

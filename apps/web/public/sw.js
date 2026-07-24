@@ -83,7 +83,7 @@ self.addEventListener("push", (event) => {
         data = {};
       }
 
-      const title = safeString(data.title, "Push Lab Pessoal", 120);
+      const title = safeString(data.title, "Avisos Pessoais", 120);
       const options = {
         body: safeString(data.body, "Voce recebeu uma notificacao.", 600),
         icon: safeUrl(data.icon_url, "/icons/icon-192.png"),
@@ -123,4 +123,3 @@ self.addEventListener("notificationclick", (event) => {
     })
   );
 });
-

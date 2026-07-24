@@ -1,4 +1,4 @@
-# Push Lab Pessoal
+# Avisos Pessoais
 
 PWA pessoal para criar, testar, enviar e agendar notificações Web Push em dispositivos próprios, com foco em iPhone instalado na tela inicial.
 
@@ -64,7 +64,7 @@ Detalhes em [ARCHITECTURE.md](./ARCHITECTURE.md).
 
 Como não foram fornecidos valores definitivos, foram adotadas escolhas conservadoras:
 
-- Nome da aplicação: Push Lab Pessoal.
+- Nome da aplicação: Avisos Pessoais.
 - Ícone: ícone próprio gerado localmente, sem marca de terceiros.
 - Domínio de produção: configurar depois em `APP_URL`/`ALLOWED_ORIGIN`.
 - Hospedagem sugerida: qualquer host HTTPS estático, por exemplo Vercel, Netlify, Cloudflare Pages ou Supabase Hosting.
@@ -233,7 +233,7 @@ Checklist manual obrigatório no iPhone: [TESTING.md](./TESTING.md).
 Verifique:
 
 - `SERVICE_WORKER_UNSUPPORTED` ou `INSECURE_CONTEXT`: no iPhone, não acesse `http://IP_DO_PC:5173`; Service Worker exige HTTPS. Publique em domínio HTTPS ou use túnel HTTPS. `localhost` só é considerado seguro no próprio dispositivo.
-- Permissão do iOS em Ajustes > Notificações > Push Lab Pessoal.
+- Permissão do iOS em Ajustes > Notificações > Avisos Pessoais.
 - Se o app foi aberto pelo ícone da tela inicial.
 - Se `VITE_VAPID_PUBLIC_KEY` corresponde a `VAPID_PRIVATE_KEY`.
 - Se `ALLOWED_ORIGIN` é exatamente o domínio do frontend.

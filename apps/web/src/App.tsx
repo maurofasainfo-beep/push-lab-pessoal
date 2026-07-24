@@ -184,7 +184,7 @@ export default function App() {
 
   function duplicateNotification(item: NotificationItem) {
     form.reset({
-      title: `${item.title} (copia)`,
+      title: item.title ? `${item.title} (copia)` : "",
       body: item.body,
       imageUrl: item.image_url || "",
       iconUrl: item.icon_url || "",
@@ -257,7 +257,7 @@ export default function App() {
       <header className="hero">
         <div>
           <p className="eyebrow">PWA pessoal</p>
-          <h1>Push Lab Pessoal</h1>
+          <h1>Avisos Pessoais</h1>
           <p>Crie, teste, envie e agende Web Push para seus proprios dispositivos autorizados.</p>
         </div>
         <div className="hero-card" aria-label="Estado do app">
@@ -347,7 +347,7 @@ export default function App() {
             <h2>{editingId ? "Editar notificacao" : "Criar notificacao"}</h2>
             <form className="notification-form" onSubmit={form.handleSubmit(submitNotification)}>
               <label>
-                Titulo
+                Titulo opcional
                 <input {...form.register("title")} maxLength={120} />
                 <span className="field-error">{form.formState.errors.title?.message}</span>
               </label>
@@ -408,7 +408,7 @@ export default function App() {
                 <input {...form.register("timezone")} />
               </label>
 
-              <NotificationPreview appName="Push Lab Pessoal" title={watched.title} body={watched.body} imageUrl={watched.imageUrl} />
+              <NotificationPreview appName="Avisos Pessoais" title={watched.title || ""} body={watched.body} imageUrl={watched.imageUrl} />
               <div className="actions">
                 <button type="submit" disabled={loading || !device}>
                   {editingId ? "Salvar edicao" : "Confirmar"}
@@ -435,7 +435,7 @@ export default function App() {
                 <article className="list-item" key={item.id}>
                   <div>
                     <StatusBadge status={item.status} />
-                    <h3>{item.title}</h3>
+                    <h3>{item.title || "Sem titulo"}</h3>
                     <p>{item.body}</p>
                     <small>{formatUtcForDevice(item.scheduled_at, device?.timezone || getDeviceTimezone())}</small>
                   </div>
@@ -466,7 +466,7 @@ export default function App() {
                 <article className="list-item" key={item.id}>
                   <div>
                     <StatusBadge status={item.status} />
-                    <h3>{item.title}</h3>
+                    <h3>{item.title || "Sem titulo"}</h3>
                     <p>{item.body}</p>
                     <small>
                       Tentativas: {item.attempt_count}

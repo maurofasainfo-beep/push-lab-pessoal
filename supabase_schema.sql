@@ -122,7 +122,7 @@ comment on table public.push_subscriptions is 'Assinaturas Web Push. endpoint, p
 create table if not exists public.notifications (
   id uuid primary key default extensions.gen_random_uuid(),
   device_id uuid not null references public.devices(id) on delete cascade,
-  title text not null check (char_length(title) between 1 and 120),
+  title text not null default '' check (char_length(title) <= 120),
   body text not null check (char_length(body) between 1 and 600),
   image_url text null check (image_url is null or (char_length(image_url) <= 1000 and image_url ~* '^https://')),
   icon_url text null check (icon_url is null or (char_length(icon_url) <= 1000 and icon_url ~* '^https://')),
@@ -493,4 +493,3 @@ begin
 exception when others then
   raise notice 'Configuracao opcional do cron nao foi concluida: %', sqlerrm;
 end $$;
-

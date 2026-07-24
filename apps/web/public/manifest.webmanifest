@@ -1,7 +1,7 @@
 {
   "id": "/?source=pwa",
-  "name": "Push Lab Pessoal",
-  "short_name": "Push Lab",
+  "name": "Avisos Pessoais",
+  "short_name": "Avisos",
   "description": "PWA pessoal para criação, teste e agendamento de Web Push em dispositivos próprios.",
   "lang": "pt-BR",
   "start_url": "/?source=pwa",
@@ -32,4 +32,3 @@
   ],
   "screenshots": []
 }
-

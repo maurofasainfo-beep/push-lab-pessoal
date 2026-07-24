@@ -32,7 +32,7 @@ export function prepareNotificationInput(values: NotificationFormValues): Prepar
   }
 
   return {
-    title: values.title.trim(),
+    title: values.title?.trim() || "",
     body: values.body.trim(),
     image_url: nullable(values.imageUrl),
     icon_url: nullable(values.iconUrl),
@@ -58,4 +58,3 @@ export function summarizeStatus(status: string): string {
   };
   return labels[status] || status;
 }
-
