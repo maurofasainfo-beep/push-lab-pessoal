@@ -1,0 +1,44 @@
+project_id = "push-lab-pessoal"
+
+[functions.register-device]
+verify_jwt = false
+
+[functions.update-device]
+verify_jwt = false
+
+[functions.register-push-subscription]
+verify_jwt = false
+
+[functions.refresh-push-subscription]
+verify_jwt = false
+
+[functions.create-notification]
+verify_jwt = false
+
+[functions.update-notification]
+verify_jwt = false
+
+[functions.cancel-notification]
+verify_jwt = false
+
+[functions.list-notifications]
+verify_jwt = false
+
+[functions.get-notification]
+verify_jwt = false
+
+[functions.send-test-notification]
+verify_jwt = false
+
+[functions.revoke-device]
+verify_jwt = false
+
+[functions.process-scheduled-notifications]
+verify_jwt = false
+
+[functions.retry-failed-notifications]
+verify_jwt = false
+
+[functions.health-check]
+verify_jwt = false
+

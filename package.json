@@ -1,0 +1,37 @@
+{
+  "name": "push-lab-pessoal",
+  "private": true,
+  "version": "0.1.0",
+  "description": "PWA pessoal para criação, teste, envio e agendamento de Web Push em dispositivos próprios.",
+  "type": "module",
+  "workspaces": [
+    "apps/web"
+  ],
+  "scripts": {
+    "dev": "npm.cmd --workspace apps/web run dev",
+    "build": "npm.cmd --workspace apps/web run build",
+    "typecheck": "npm.cmd --workspace apps/web run typecheck && tsc -p tsconfig.test.json --noEmit",
+    "test": "vitest run",
+    "lint": "eslint apps/web/src tests scripts --max-warnings=0",
+    "check:edge": "deno check supabase/functions/register-device/index.ts supabase/functions/update-device/index.ts supabase/functions/register-push-subscription/index.ts supabase/functions/refresh-push-subscription/index.ts supabase/functions/create-notification/index.ts supabase/functions/update-notification/index.ts supabase/functions/cancel-notification/index.ts supabase/functions/list-notifications/index.ts supabase/functions/get-notification/index.ts supabase/functions/send-test-notification/index.ts supabase/functions/revoke-device/index.ts supabase/functions/process-scheduled-notifications/index.ts supabase/functions/retry-failed-notifications/index.ts supabase/functions/health-check/index.ts",
+    "lint:edge": "deno lint supabase/functions",
+    "generate:icons": "node scripts/generate-icons.mjs",
+    "audit:secrets": "node scripts/audit-secrets.mjs",
+    "validate": "npm.cmd run lint && npm.cmd run typecheck && npm.cmd run test && npm.cmd run build && npm.cmd run check:edge && npm.cmd run lint:edge && npm.cmd run audit:secrets"
+  },
+  "devDependencies": {
+    "@types/react": "19.2.17",
+    "@types/react-dom": "19.2.3",
+    "@types/node": "26.1.1",
+    "@types/web-push": "3.6.4",
+    "@vitejs/plugin-react": "6.0.4",
+    "eslint": "10.7.0",
+    "globals": "17.7.0",
+    "jsdom": "29.1.1",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.65.0",
+    "vite": "8.1.5",
+    "vitest": "4.1.10",
+    "web-push": "3.6.7"
+  }
+}

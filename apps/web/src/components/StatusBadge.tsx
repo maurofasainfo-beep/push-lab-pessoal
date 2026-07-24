@@ -1,0 +1,6 @@
+import { summarizeStatus } from "../lib/notificationPayload";
+
+export function StatusBadge({ status }: { status: string }) {
+  return <span className={`status status-${status}`}>{summarizeStatus(status)}</span>;
+}
+

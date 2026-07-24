@@ -1,0 +1,23 @@
+{
+  "name": "@push-lab/web",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview --host 0.0.0.0",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@hookform/resolvers": "5.4.0",
+    "@supabase/supabase-js": "2.110.8",
+    "date-fns": "4.4.0",
+    "date-fns-tz": "3.2.0",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "react-hook-form": "7.82.0",
+    "zod": "4.4.3"
+  }
+}
+
