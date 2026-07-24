@@ -12,16 +12,22 @@ function correlationId(req) {
 }
 
 function allowedOrigins() {
-  return String(process.env.ALLOWED_ORIGIN || "")
+  const configured = String(process.env.ALLOWED_ORIGIN || "")
     .split(",")
     .map((origin) => origin.trim())
+    .map((origin) => origin.replace(/\/+$/, ""))
     .filter(Boolean);
+
+  const netlifyProvided = [process.env.URL, process.env.DEPLOY_URL, process.env.DEPLOY_PRIME_URL, process.env.APP_URL]
+    .filter(Boolean)
+    .map((origin) => String(origin).replace(/\/+$/, ""));
+
+  return [...new Set([...configured, ...netlifyProvided])];
 }
 
 function corsHeaders(req) {
   const origin = req.headers.get("origin");
-  const allowed = allowedOrigins();
-  const allowOrigin = origin && (allowed.length === 0 || allowed.includes(origin)) ? origin : allowed[0] || "*";
+  const allowOrigin = origin && isAllowedOrigin(req) ? origin : allowedOrigins()[0] || "*";
   return {
     ...jsonHeaders,
     "access-control-allow-origin": allowOrigin,
@@ -32,9 +38,20 @@ function corsHeaders(req) {
 }
 
 function isAllowedOrigin(req) {
-  const origin = req.headers.get("origin");
+  const origin = req.headers.get("origin")?.replace(/\/+$/, "");
+  if (!origin) return true;
+
+  let requestOrigin = "";
+  try {
+    requestOrigin = new URL(req.url).origin.replace(/\/+$/, "");
+  } catch {
+    requestOrigin = "";
+  }
+
+  if (requestOrigin && origin === requestOrigin) return true;
+
   const allowed = allowedOrigins();
-  return !origin || allowed.length === 0 || allowed.includes(origin);
+  return allowed.length === 0 || allowed.includes(origin);
 }
 
 export function preflight(req) {
@@ -723,4 +740,3 @@ export async function handleApi(req, routeName) {
 export function getAdminClient() {
   return adminClient();
 }
-
