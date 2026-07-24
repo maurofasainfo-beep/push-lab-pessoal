@@ -1,22 +1,19 @@
 import type { ApiEnvelope, NotificationItem, StoredDevice } from "../types/domain";
 
 export interface ApiConfig {
-  supabaseUrl: string;
-  anonKey: string;
+  apiBaseUrl: string;
   appVersion: string;
 }
 
 export function getApiConfig(): ApiConfig {
   return {
-    supabaseUrl: import.meta.env.VITE_SUPABASE_URL || "",
-    anonKey: import.meta.env.VITE_SUPABASE_ANON_KEY || "",
+    apiBaseUrl: import.meta.env.VITE_API_BASE_URL || "/api",
     appVersion: import.meta.env.VITE_APP_VERSION || "0.1.0"
   };
 }
 
 export function hasApiConfig(): boolean {
-  const config = getApiConfig();
-  return Boolean(config.supabaseUrl && config.anonKey);
+  return true;
 }
 
 export async function callFunction<T>(
@@ -25,13 +22,9 @@ export async function callFunction<T>(
   options: { method?: "GET" | "POST"; device?: StoredDevice | null } = {}
 ): Promise<T> {
   const config = getApiConfig();
-  if (!config.supabaseUrl || !config.anonKey) {
-    throw new Error("CONFIG_MISSING: Configure VITE_SUPABASE_URL e VITE_SUPABASE_ANON_KEY.");
-  }
 
   const headers: Record<string, string> = {
     "content-type": "application/json",
-    apikey: config.anonKey,
     "x-app-version": config.appVersion
   };
 
@@ -40,7 +33,7 @@ export async function callFunction<T>(
     headers["x-device-secret"] = options.device.secret;
   }
 
-  const response = await fetch(`${config.supabaseUrl.replace(/\/$/, "")}/functions/v1/${functionName}`, {
+  const response = await fetch(`${config.apiBaseUrl.replace(/\/$/, "")}/${functionName}`, {
     method: options.method || "POST",
     headers,
     body: (options.method || "POST") === "GET" ? undefined : JSON.stringify(body)

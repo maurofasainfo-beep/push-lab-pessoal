@@ -51,10 +51,12 @@ Limitações relevantes:
 ## Arquitetura resumida
 
 - Frontend: React + TypeScript + Vite, PWA, Service Worker, React Hook Form, Zod, date-fns/date-fns-tz.
-- Backend: Supabase Edge Functions em TypeScript/Deno.
+- Backend simplificado recomendado: Netlify Functions no mesmo domínio do frontend.
 - Banco: PostgreSQL no Supabase com RLS habilitado e sem acesso direto para `anon`/`authenticated`.
 - Web Push: biblioteca `web-push`, VAPID, payload sanitizado e envio somente pelo backend.
-- Agendamento: Supabase Cron/pg_cron chamando `process-scheduled-notifications` via pg_net; alternativa: cron externo chamando a mesma função.
+- Agendamento simplificado recomendado: Netlify Scheduled Function a cada minuto.
+
+Para publicar sem Supabase Edge Functions, siga [NETLIFY_RAPIDO.md](./NETLIFY_RAPIDO.md). Esse é o caminho mais simples agora.
 
 Detalhes em [ARCHITECTURE.md](./ARCHITECTURE.md).
 
